@@ -18,38 +18,39 @@ class PickingUp(st.State):
     def execute(self):
         print("PickingUp")
         
-        while True:
-            size = ultra.get_trashsize()
+        size = 10 # needed any value
+        # while True:
+            # size = ultra.get_trashsize()
 
         if size < 10: # ToDo: Adjust size values
-                grab('small')
-            elif size < 20:
-                grab('medium')
-            elif size < 30:
-                grab('large')
-            else:
-                time.sleep(0.2) 
-                print("Too large")   
-                self.robot.change_state(stState.Turn(self.robot))
+            self.grab('small')
+        elif size < 20:
+            self.grab('medium')
+        elif size < 30:
+            self.grab('large')
+        else:
+            time.sleep(0.2) 
+            print("Too large")   
+            self.robot.change_state(stState.Turn(self.robot))
         
         self.robot.change_state(stState.Storing(self.robot))
 
-    def grab(size):
+    def grab(self, size):
         # Adjust arm position values depending on size
         if size == 'small':
-            # servo1_pos =
+            servo1_pos = 0 # needed any value
             # servo2_pos =
             # servo3_pos =
             # servo4_pos =
             # set arm position values for small trash
         elif size == 'medium':
-            # servo1_pos =
+            servo1_pos = 1 # needed any value
             # servo2_pos =
             # servo3_pos =
             # servo4_pos =
             # set arm position values for medium trash
         elif size == 'large':
-            # servo1_pos =
+            servo1_pos = 2 # needed any value
             # servo2_pos =
             # servo3_pos =
             # servo4_pos =
@@ -58,36 +59,37 @@ class PickingUp(st.State):
             return
         
         # Step 1: Rotate base to default forward
-        move_servo() # ToDo: To position; which servo(s)
+        self.move_servo() # ToDo: To position; which servo(s)
         time.sleep(0.3)
 
         # Step 2: Lower the arm
-        move_servo() # ToDo: To position; which servo(s)
+        self.move_servo() # ToDo: To position; which servo(s)
         time.sleep(0.5)
 
         # Step 3: Close gripper to grab object
-        move_servo()  # ToDo: To position; which servo(s)
+        self.move_servo()  # ToDo: To position; which servo(s)
         time.sleep(0.5)
 
         # Step 4: Lift arm
-        move_servo() # ToDo: To position; which servo(s)
+        self.move_servo() # ToDo: To position; which servo(s)
         time.sleep(0.5)
 
     #def move_servo(pos, servo):
-    def move_servo():
+    def move_servo(self):
+        servo = 0 # needed any value
         # control range if illegal
         if servo == 0:
-            pos = ctrl_range(pos, servo0_max, servo0_min)
+            pos = self.ctrl_range(pos, self.servo0_max, self.servo0_min)
         elif servo == 1:
-            pos = ctrl_range(pos, servo1_max, servo1_min)
+            pos = self.ctrl_range(pos, self.servo1_max, self.servo1_min)
         elif servo == 2:
-            pos = ctrl_range(pos, servo2_max, servo2_min)
+            pos = self.ctrl_range(pos, self.servo2_max, self.servo2_min)
         elif servo == 3:
-            pos = ctrl_range(pos, servo3_max, servo3_min)
+            pos = self.ctrl_range(pos, self.servo3_max, self.servo3_min)
         
         pwm.set_pwm(pos, servo)
 
-    def ctrl_range(pos, max, min):
+    def ctrl_range(self, pos, max, min):
         # set servo to legal angle if illegal
         if pos > max:
             return int(max)
