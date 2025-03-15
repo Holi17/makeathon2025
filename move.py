@@ -445,6 +445,7 @@ sc.start()
 FORWARD_LONG_TIME = 1.3  # Avanzar 1 metro
 FORWARD_SHORT_TIME = 0.26  # Avanzar 20 cm
 SPIN_TIME = 1.5  # Giro de 180° (ajustar según sea necesario)
+BACKWARD_TIME = -0.25 #move backward
 
 try:
 	speed_set = 60
