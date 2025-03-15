@@ -45,4 +45,4 @@ class Moving(st.State): # TODO: Insert moving logic
                  mv.motorStop()
 
          except KeyboardInterrupt:
-	    #     mv.destroy()
+	         mv.destroy()
